@@ -117,7 +117,7 @@ Lines 92-101:
 
 - The input data is processed by calling an associated method on the `Cow` object. These methods manipulate properties of the `Cow` object and are expected to run in `O(1)` time.
 
-From line 82, the above is repeated for each line of input. The resulting complexity is `O(r*w)`. However, as `r` grows, `w` becomes insignificant and representing the complexity as `O(r)` is acceptable.
+From line 82, the above is repeated for each line of input. The resulting complexity is `O(r*w)`. However, `w` can be treated as a constant, which allows us to simplify the complexity to `O(r)`.
 
 ### Sorting/Output  - `O(c*log(c))`
 
@@ -129,7 +129,7 @@ Line 105: `sort_arr = np.sort(cow_arr[: len(index_map)], kind="mergesort")`
 
 Lines 106-108:
 
-- A for loop is used to iterate through the array of `Cow` objects. So long as the record is valid, as defined by the problem statement, it is printed. This loop incurs a complexity of `O(c)`, but is insignificant when compared to ~~the power of the force~~ `O(c*log(c))`.
+- A for loop is used to iterate through the array of `Cow` objects. So long as the record is valid, as defined by the problem statement, it is printed. This loop incurs a complexity of `O(c)`, but is insignificant next to ~~the power of the force~~ `O(c*log(c))`.
 
 ### Conclusion
 
