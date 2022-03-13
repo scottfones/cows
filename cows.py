@@ -75,7 +75,7 @@ def main() -> int:
 
         i = 0
         index_map = {}
-        cow_arr = np.full((f_len,), Cow(), dtype=Cow)
+        cow_arr = np.empty(f_len, dtype=Cow)
 
         # Process status reports
         while i < f_len:
@@ -102,7 +102,7 @@ def main() -> int:
 
             i += 1
 
-    sort_arr = np.sort(cow_arr, kind="mergesort")
+    sort_arr = np.sort(cow_arr[:len(index_map)], kind="mergesort")
     for cow in sort_arr:
         if cow.is_valid_record():
             print(cow)
