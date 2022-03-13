@@ -102,7 +102,7 @@ def main() -> int:
 
             i += 1
 
-    sort_arr = np.sort(cow_arr[:len(index_map)], kind="mergesort")
+    sort_arr = np.sort(cow_arr[: len(index_map)], kind="mergesort")
     for cow in sort_arr:
         if cow.is_valid_record():
             print(cow)
