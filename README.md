@@ -86,24 +86,31 @@ I believe that the runtime of this program satisfies the `O(c*log(c)+r)` time re
 As we trace the path of the input, we need to ensure that the overall process is linear.
 
 Line 77: `index_map = {}`
+
 Initializes a hash map to associate a cow ID with an array index.
 
 Line 78:  `cow_arr = np.empty(f_len, dtype=Cow)`
+
 Initializes an array to store the records. A numpy array was chosen over a list to avoid the underlying complexity.
 
 Line 82: `cow_id, act_code, act_data, t_stamp = f.readline().split()`
+
 The `split()` method is used to facilitate variable assignments. With no parameters, the `split()` method is expected to run in `O(w)` time, where w is the width of the line.
 
 Line 85: `if cow_id in index_map:`
+
 Determining whether a key exists in the hash map is [expected](https://wiki.python.org/moin/TimeComplexity) to run in `O(1)` time.
 
 Line 86: `arr_id = index_map[cow_id]`
+
 Retrieving a value from the hash map is [expected](https://wiki.python.org/moin/TimeComplexity) to run in `O(1)` time.
 
 Line 88: `arr_id = index_map.__len__()`
+
 The length of the hash map is a [stored value](https://www.geeksforgeeks.org/internal-working-of-the-len-function-in-python) and is expected to run in `O(1)` time.
 
 Line 90: `cow_arr[arr_id] = Cow(cow_id)`
+
 Associating an array index with a new `Cow` object should run in `O(1)` time.
 
 Lines 92-101:
@@ -116,6 +123,7 @@ From line 82, the above is repeated for each line of input. The resulting comple
 There are only two chunks of code to consider in this section and both have are straightforward.
 
 Line 105: `sort_arr = np.sort(cow_arr[: len(index_map)], kind="mergesort")`
+
 Numpy's `sort()` method is used. While `mergesort` is passed as a parameter, the [documentation](https://numpy.org/doc/stable/reference/generated/numpy.sort.html) states `timsort` might be used instead. Regardless, we're guaranteed a worst case complexity of `O(c*log(c))`.
 
 Lines 106-108:
