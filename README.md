@@ -53,8 +53,30 @@ An example of output is below:
 
 ## Runtime Analysis
 
-I believe that the runtime of this program satisfies the `O(c*log(c)+r)` requirement, where `c` is the number of cows and `r` is the number of records. I will discuss each component of the runtime in turn.
+I believe that the runtime of this program satisfies the `O(c*log(c)+r)` time requirement, where `c` is the number of cows and `r` is the number of records. The program accomplishes this via a hash map, an array, and a built-in sort. This can be further broken down into input parsing and sorting.
 
-### Input Parsing
+### Input Parsing - `O(r)`
+
+As we trace the path of the input, we need to ensure that the overall process is linear.
+
+Line 77: Initializes a hash map to associate a cow ID with an array index.
+
+Line 78: Initializes an array to store the records. A numpy array was chosen over a list to avoid the underlying complexity.
+
+Line 82: The `split()` method is used to facilitate variable assignments. With no parameters, the `split()` method is expected to run in `O(w)` time, where w is the width of the line.
+
+Line 85: Determining whether a key exists in the hash map is [expected](https://wiki.python.org/moin/TimeComplexity) to run in `O(1)` time.
+
+Line 86: Retrieving a value from the hash map is [expected](https://wiki.python.org/moin/TimeComplexity) to run in `O(1)` time.
+
+Line 88: The length of the hash map is a [stored value](https://www.geeksforgeeks.org/internal-working-of-the-len-function-in-python) and is expected to run in `O(1)` time.
+
+Line 90: Associating an array index with a new `Cow` object should run in `O(1)` time.
+
+Lines 92-101: The input data is processed by calling an associated method on the `Cow` object. These methods manipulate properties of the `Cow` object and are expected to run in `O(1)` time.
+
+From line 82, the above is repeated for each line of input. The resulting complexity is `O(r*w)`. However, as `r` grows, `w` becomes insignificant and representing the complexity as `O(r)` is acceptable.
+
+
 
 
