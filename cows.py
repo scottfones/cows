@@ -43,7 +43,7 @@ class Cow:
 
     def is_valid_record(self) -> bool:
         """Check if record contains a weighing and milking."""
-        return self.avg_milk > 0 and self.cur_weight > 0
+        return self.num_milk > 0 and self.cur_weight > 0
 
     def __eq__(self, other) -> bool:
         """Cow records are equal if all their measurement fields are equal."""
