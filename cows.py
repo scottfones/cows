@@ -79,7 +79,7 @@ def main() -> int:
 
         # Process status reports
         while i < f_len:
-            cow_id, act_code, act_data, t_stamp = f.readline().strip().split(" ")
+            cow_id, act_code, act_data, t_stamp = f.readline().split()
 
             arr_id = -1
             if cow_id in index_map:
