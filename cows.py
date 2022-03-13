@@ -1,11 +1,9 @@
 """CISC 320 - Programming Assignment 1 - Scott Fones."""
-from functools import total_ordering
 import sys
 import numpy as np
 from pathlib import Path
 
 
-@total_ordering
 class Cow:
     """Cow class."""
 
