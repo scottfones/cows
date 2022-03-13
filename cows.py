@@ -12,9 +12,9 @@ class Cow:
     def __init__(self, cow_id: str = ""):
         """Initialize cow record."""
         self.cow_id = cow_id
-        self.avg_milk: float = -1
-        self.tot_milk: int = 0
-        self.num_milk: float = 0.0
+        self.milk_avg: float = -1
+        self.milk_sum: int = 0
+        self.milk_cnt: float = 0.0
         self.temp: int = -1
         self.cur_weight: int = -1
         self.low_weight: int = -1
@@ -24,9 +24,9 @@ class Cow:
 
         Average milk is kept as a float for sorting, truncated to int for output.
         """
-        self.tot_milk += m
-        self.num_milk += 1.0
-        self.avg_milk = self.tot_milk / self.num_milk
+        self.milk_sum += m
+        self.milk_cnt += 1.0
+        self.milk_avg = self.milk_sum / self.milk_cnt
 
     def add_temp(self, t: int) -> None:
         """Update temperature metrics. Not used in this assignment."""
@@ -43,12 +43,12 @@ class Cow:
 
     def is_valid_record(self) -> bool:
         """Check if record contains a weighing and milking."""
-        return self.num_milk > 0 and self.cur_weight > 0
+        return self.milk_cnt > 0 and self.cur_weight > 0
 
     def __eq__(self, other) -> bool:
         """Cow records are equal if all their measurement fields are equal."""
         return (
-            self.avg_milk == other.avg_milk
+            self.milk_avg == other.milk_avg
             and self.cur_weight == other.cur_weight
             and self.low_weight == other.low_weight
         )
@@ -57,13 +57,13 @@ class Cow:
         """Order by Lowest Weight, Latest Weight, Highest Avg Milk."""
         if self.low_weight == obj.low_weight:
             if self.cur_weight == obj.cur_weight:
-                return self.avg_milk < obj.avg_milk
+                return self.milk_avg < obj.milk_avg
             return self.cur_weight < obj.cur_weight
         return self.low_weight < obj.low_weight
 
     def __repr__(self):
         """Return the problem statment's definition for cow record output."""
-        return f"{self.cow_id} {self.low_weight} {self.cur_weight} {self.avg_milk.__floor__()}"
+        return f"{self.cow_id} {self.low_weight} {self.cur_weight} {self.milk_avg.__floor__()}"
 
 
 def main() -> int:
@@ -98,7 +98,7 @@ def main() -> int:
                 case "W":
                     cow_arr[arr_id].add_weight(act_data)
                 case _:
-                    raise ValueError(f"Not an action code: {act_code}")
+                    raise ValueError(f"Not a valid action code: {act_code}")
 
             i += 1
 
