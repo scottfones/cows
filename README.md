@@ -1,5 +1,31 @@
 # CISC 320 - Programming Assignment 1 - COWS!!!
 
+## Usage
+
+```bash
+python cows.py [file]
+```
+
+### Examples
+
+```bash
+$ python cows.py ./novel_data.txt
+7 1000 2000 3
+1 1000 2000 3
+9 1000 2000 8
+2 1000 2001 4
+4 1001 2000 6
+8 1500 2000 5
+3 1500 2001 4
+5 1501 2001 5
+```
+
+```bash
+$ python cows.py ./example_data.txt
+507 1000 1000 6
+1 1400 1700 7
+```
+
 ## Formal Specification
 
 ### Problem
@@ -53,7 +79,7 @@ An example of output is below:
 
 ## Runtime Analysis
 
-I believe that the runtime of this program satisfies the `O(c*log(c)+r)` time requirement, where `c` is the number of cows and `r` is the number of records. The program accomplishes this via a hash map, an array, and a built-in sort. This can be further broken down into input parsing and sorting.
+I believe that the runtime of this program satisfies the `O(c*log(c)+r)` time requirement, where `c` is the number of cows and `r` is the number of records. The program accomplishes this via a hash map, an array, and a built-in sort. This can be further broken down into input parsing and sorting/output.
 
 ### Input Parsing - `O(r)`
 
@@ -77,6 +103,14 @@ Lines 92-101: The input data is processed by calling an associated method on the
 
 From line 82, the above is repeated for each line of input. The resulting complexity is `O(r*w)`. However, as `r` grows, `w` becomes insignificant and representing the complexity as `O(r)` is acceptable.
 
+### Sorting/Output  - `O(c*log(c))`
 
+There are only two chunks of code to consider in this section and both have are straightforward.
 
+Line 105: Numpy's `sort()` method is used. While `mergesort` is passed as a parameter, the [documentation](https://numpy.org/doc/stable/reference/generated/numpy.sort.html) states `timsort` might be used instead. Regardless, we're guaranteed a worst case complexity of `O(c*log(c))`.
 
+Lines 106-108: A for loop is used to iterate through the array of `Cow` objects. So long as the record is valid, as defined by the problem statement, it is printed. This loop incurs a complexity of `O(c)` time, but is insignificant when compared to `O(c*log(c))`.
+
+### Conclusion
+
+There are two main parts to this program. The first is the input parsing, which is `O(r)` time. The second is the sorting/output, which is `O(c*log(c))` time. The combination yields an overall complexity is `O(c*log(c)+r)` time, as required.
