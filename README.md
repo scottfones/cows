@@ -125,7 +125,7 @@ There are only two chunks of code to consider in this section and both have are 
 
 Line 103: `sort_arr = np.sort(cow_arr[: len(index_map)], kind="mergesort")`
 
-- The empty array elements are skimmed by using the length of the hash map to create a view. This is [expected](https://wiki.python.org/moin/TimeComplexity) to run in `O(1)` time.
+- The cow array elements are isolated by using the length of the hash map to create a view. This is [expected](https://wiki.python.org/moin/TimeComplexity) to run in `O(1)` time.
 - The [view](https://numpy.org/doc/stable/user/basics.copies.html#indexing-operations) of the array is `O(1)` as we are modifying how the array is [addressed](https://numpy.org/doc/stable/user/basics.copies.html#view) and not modifying the underlying data.
 - Numpy's `sort()` method is used. While `mergesort` is passed as a parameter, the [documentation](https://numpy.org/doc/stable/reference/generated/numpy.sort.html#:~:text=yes-,Note,-The%20datatype%20determines) states `timsort` might be used instead. Regardless, we're guaranteed a worst case complexity of `O(c*log(c))`.
 
