@@ -20,7 +20,7 @@ class Cow:
     def add_milk(self, m: int) -> None:
         """Update milk metrics.
 
-        Average milk is kept as a float for sorting, truncated to int for output.
+        Average milk is kept as a float for sorting, truncated to int by __repr__().
         """
         self.milk_sum += m
         self.milk_cnt += 1.0
@@ -83,7 +83,7 @@ def main() -> int:
             if cow_id in index_map:
                 arr_id = index_map[cow_id]
             else:
-                arr_id = index_map.__len__()
+                arr_id = len(index_map)
                 index_map[cow_id] = arr_id
                 cow_arr[arr_id] = Cow(cow_id)
 
