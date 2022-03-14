@@ -85,52 +85,54 @@ I believe that the runtime of this program satisfies the `O(c*log(c)+r)` time re
 
 As we trace the path of the input, we need to ensure that the overall process has linear complexity.
 
-Line 77: `index_map = {}`
+Line 75: `index_map = {}`
 
 - Initializes a hash map to associate a cow ID with an array index.
 
-Line 78:  `cow_arr = np.empty(f_len, dtype=Cow)`
+Line 76:  `cow_arr = np.empty(f_len, dtype=Cow)`
 
-- Initializes an array to store the records. A numpy array was chosen over a list to avoid the underlying complexity.
+- Initializes an empty array to store the records. A numpy array was chosen over a list to avoid the underlying black box. This is [expected](https://pypi.org/project/big-O/#:~:text=big_o.big_o.Linear%27%3E%2C%20...)-,numpy.empty,-instead%20just%20allocates) to run in `O(1)` time.
 
-Line 82: `cow_id, act_code, act_data, t_stamp = f.readline().split()`
+Line 80: `cow_id, act_code, act_data, t_stamp = f.readline().split()`
 
 - The `split()` method is used to facilitate variable assignments. With no parameters, the `split()` method is expected to run in `O(w)` time, where w is the width of the line.
 
-Line 85: `if cow_id in index_map:`
+Line 83: `if cow_id in index_map:`
 
 - Determining whether a key exists in the hash map is [expected](https://wiki.python.org/moin/TimeComplexity) to run in `O(1)` time.
 
-Line 86: `arr_id = index_map[cow_id]`
+Line 84: `arr_id = index_map[cow_id]`
 
 - Retrieving a value from the hash map is [expected](https://wiki.python.org/moin/TimeComplexity) to run in `O(1)` time.
 
-Line 88: `arr_id = index_map.__len__()`
+Line 86: `arr_id = len(index_map)`
 
-- The length of the hash map is a [stored value](https://www.geeksforgeeks.org/internal-working-of-the-len-function-in-python) and is expected to run in `O(1)` time.
+- The length of the hash map is a [stored value](https://wiki.python.org/moin/TimeComplexity) and is expected to run in `O(1)` time.
 
-Line 90: `cow_arr[arr_id] = Cow(cow_id)`
+Line 88: `cow_arr[arr_id] = Cow(cow_id)`
 
 - Associating an array index with a new `Cow` object should run in `O(1)` time.
 
-Lines 92-101:
+Lines 90-99:
 
 - The input data is processed by calling an associated method on the `Cow` object. These methods manipulate properties of the `Cow` object and are expected to run in `O(1)` time.
 
-From line 82, the above is repeated for each line of input. The resulting complexity is `O(r*w)`. However, `w` can be treated as a constant, which allows us to simplify the complexity to `O(r)`.
+From line 80, the above is repeated for each line of input. The resulting complexity is `O(r*w)`. However, `w` can be treated as a constant, which allows us to simplify the complexity to `O(r)`.
 
 ### Sorting/Output  - `O(c*log(c))`
 
 There are only two chunks of code to consider in this section and both have are straightforward.
 
-Line 105: `sort_arr = np.sort(cow_arr[: len(index_map)], kind="mergesort")`
+Line 103: `sort_arr = np.sort(cow_arr[: len(index_map)], kind="mergesort")`
 
-- Numpy's `sort()` method is used. While `mergesort` is passed as a parameter, the [documentation](https://numpy.org/doc/stable/reference/generated/numpy.sort.html) states `timsort` might be used instead. Regardless, we're guaranteed a worst case complexity of `O(c*log(c))`.
+- The empty array elements are skimmed by using the length of the hash map to create a view. This is [expected](https://wiki.python.org/moin/TimeComplexity) to run in `O(1)` time.
+- The [view](https://numpy.org/doc/stable/user/basics.copies.html#indexing-operations) of the array is `O(1)` as we are modifying how the array is [addressed](https://numpy.org/doc/stable/user/basics.copies.html#view) and not modifying the underlying data.
+- Numpy's `sort()` method is used. While `mergesort` is passed as a parameter, the [documentation](https://numpy.org/doc/stable/reference/generated/numpy.sort.html#:~:text=yes-,Note,-The%20datatype%20determines) states `timsort` might be used instead. Regardless, we're guaranteed a worst case complexity of `O(c*log(c))`.
 
-Lines 106-108:
+Lines 104-106:
 
-- A for loop is used to iterate through the array of `Cow` objects. So long as the record is valid, as defined by the problem statement, it is printed. This loop incurs a complexity of `O(c)`, but is insignificant next to ~~the power of the force~~ `O(c*log(c))`.
+- A for loop is used to iterate through the array of `Cow` objects. So long as the record is valid, as defined by the problem statement, it is printed. This loop adds a complexity of `O(c)`, but is insignificant next to ~~the power of the force~~ `O(c*log(c))`.
 
 ### Conclusion
 
-There are two main parts to this program. The first is input parsing, which is `O(r)` time. The second is the sorting/output, which is `O(c*log(c))` time. The combination yields an overall complexity is `O(c*log(c)+r)` time, as required.
+There are two main parts to this program. The first is input parsing, which is `O(r)`. The second is the sorting/output, which is `O(c*log(c))`. The combination yields an overall complexity of `O(c*log(c)+r)`, as required.
