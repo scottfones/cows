@@ -111,7 +111,7 @@ Line 86: `arr_id = len(index_map)`
 
 Line 88: `cow_arr[arr_id] = Cow(cow_id)`
 
-- Associating an array index with a new `Cow` object should run in `O(1)` time.
+- Associating an array index with a new `Cow` object should run in `O(1)` in the average case.
 
 Lines 90-99:
 
@@ -135,4 +135,4 @@ Lines 104-106:
 
 ### Conclusion
 
-There are two main parts to this program. The first is input parsing, which is `O(r)`. The second is the sorting/output, which is `O(c*log(c))`. The combination yields an overall complexity of `O(c*log(c)+r)`, as required.
+There are two main parts to this program. The first is input parsing, which is `O(r)`. The second is the sorting/output, which is `O(c*log(c))`. The combination yields an overall, average-case complexity of `O(c*log(c)+r)`, as required.
