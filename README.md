@@ -117,7 +117,7 @@ Lines 90-99:
 
 - The input data is processed by calling an associated method on the `Cow` object. These methods manipulate properties of the `Cow` object and are expected to run in `O(1)` time.
 
-From line 80, the above is repeated for each line of input. The resulting complexity is `O(r*w)`. However, `w` can be treated as a constant, which allows us to simplify the complexity to `O(r)`.
+From line 80, the above is repeated for each line of input. The resulting complexity is `O(r*w)`. However, `w` can be treated as a constant, which allows us to simplify the complexity to `O(r)`. In other words, the complexity per line of input is `O(1)`, as required in the problem statement.
 
 ### Sorting/Output  - `O(c*log(c))`
 
