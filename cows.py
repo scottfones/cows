@@ -13,7 +13,7 @@ class Cow:
         self.cow_id = cow_id
         self.milk_avg: float = -1
         self.milk_sum: int = 0
-        self.milk_cnt: float = 0.0 # float to avoid integer division
+        self.milk_cnt: float = 0.0  # float to avoid integer division
         self.temp: int = -1
         self.cur_weight: int = -1
         self.low_weight: int = -1
