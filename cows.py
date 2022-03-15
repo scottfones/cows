@@ -11,14 +11,14 @@ class Cow:
     def __init__(self, cow_id: str = ""):
         """Initialize cow record."""
         self.cow_id = cow_id
-        self.milk_avg: float = -1
-        self.milk_cnt: float = 0.0  # float to avoid integer division
-        self.milk_sum: int = 0
-        self.temp: int = -1
-        self.weight_cur: int = -1
-        self.weight_low: int = -1
+        self.milk_avg: float = -1.0
+        self.milk_cnt: float = 0.0
+        self.milk_sum: float = 0.0
+        self.temp: float = -1.0
+        self.weight_cur: float = -1.0
+        self.weight_low: float = -1.0
 
-    def add_milk(self, m: int) -> None:
+    def add_milk(self, m: float) -> None:
         """Update milk metrics.
 
         Average milk is kept as a float for sorting, truncated to int by __repr__().
@@ -27,17 +27,17 @@ class Cow:
         self.milk_sum += m
         self.milk_avg = self.milk_sum / self.milk_cnt
 
-    def add_temp(self, t: int) -> None:
+    def add_temp(self, t: float) -> None:
         """Update temperature metrics. Not used in this assignment."""
         self.temp = t
 
-    def add_weight(self, w: int) -> None:
+    def add_weight(self, w: float) -> None:
         """Update weight metrics.
 
         Ignoring timestamps. Problem statement specifies record times are monotonically increasing.
         """
         self.weight_cur = w
-        if self.weight_low > w or self.weight_low == -1:
+        if self.weight_low > w or self.weight_low < 0:
             self.weight_low = w
 
     def is_valid_record(self) -> bool:
@@ -65,7 +65,7 @@ class Cow:
 
     def __repr__(self):
         """Return the problem statment's definition for cow record output."""
-        return f"{self.cow_id} {self.weight_low} {self.weight_cur} {math.floor(self.milk_avg)}"
+        return f"{self.cow_id} {math.floor(self.weight_low)} {math.floor(self.weight_cur)} {math.floor(self.milk_avg)}"
 
 
 def main() -> int:
@@ -91,7 +91,7 @@ def main() -> int:
                 index_map[cow_id] = arr_id
                 cow_arr[arr_id] = Cow(cow_id)
 
-            act_data = int(act_data)
+            act_data = float(act_data)
             match act_code:
                 case "M":
                     cow_arr[arr_id].add_milk(act_data)
