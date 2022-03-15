@@ -87,7 +87,7 @@ As we trace the path of the input, we need to ensure that the overall process ha
 
 Line 78: `index_map = {}`
 
-- Initializes a hash map to associate a cow ID with an array index.
+- Initializes a hash map to associate a cow ID with an array index. Cow ID's are kept as str values to benefit from hash map [optimizations](https://wiki.python.org/moin/TimeComplexity#:~:text=Note%20that%20there%20is%20a%20fast%2Dpath%20for%20dicts%20that%20(in%20practice)%20only%20deal%20with%20str%20keys%3B%20this%20doesn%27t%20affect%20the%20algorithmic%20complexity%2C%20but%20it%20can%20significantly%20affect%20the%20constant%20factors%3A%20how%20quickly%20a%20typical%20program%20finishes.).
 
 Line 79:  `cow_arr = np.empty(f_len, dtype=Cow)`
 
