@@ -53,7 +53,7 @@ class Cow:
             and self.weight_low == other.weight_low
         )
 
-    def __lt__(self, obj):
+    def __lt__(self, obj) -> bool:
         """Order by Lowest Weight, Latest Weight, Highest Avg Milk."""
         if self.weight_low == obj.weight_low:
             if self.weight_cur == obj.weight_cur:
@@ -63,7 +63,7 @@ class Cow:
             return self.weight_cur < obj.weight_cur
         return self.weight_low < obj.weight_low
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """Return the problem statment's definition for cow record output."""
         return f"{self.cow_id} {math.floor(self.weight_low)} {math.floor(self.weight_cur)} {math.floor(self.milk_avg)}"
 
