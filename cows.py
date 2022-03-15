@@ -56,6 +56,8 @@ class Cow:
         """Order by Lowest Weight, Latest Weight, Highest Avg Milk."""
         if self.low_weight == obj.low_weight:
             if self.cur_weight == obj.cur_weight:
+                if self.milk_avg == obj.milk_avg:
+                    return self.cow_id < obj.cow_id
                 return self.milk_avg < obj.milk_avg
             return self.cur_weight < obj.cur_weight
         return self.low_weight < obj.low_weight
@@ -77,8 +79,8 @@ def main() -> int:
         cow_arr = np.empty(f_len, dtype=Cow)
 
         # Process status reports
-        while i < f_len:
-            cow_id, act_code, act_data, t_stamp = f.readline().split()
+        for line in f:
+            cow_id, act_code, act_data, t_stamp = line.split()
 
             arr_id = -1
             if cow_id in index_map:
@@ -102,9 +104,9 @@ def main() -> int:
             i += 1
 
     sort_arr = np.sort(cow_arr[: len(index_map)], kind="mergesort")
-    for i in range(len(sort_arr)):
-        if sort_arr[i].is_valid_record():
-            print(sort_arr[i])
+    for cow in sort_arr:
+        if cow.is_valid_record():
+            print(cow)
 
     return 0
 
