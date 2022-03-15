@@ -81,7 +81,7 @@ def main() -> int:
 
         # Process status reports
         for line in f:
-            cow_id, act_code, act_data, t_stamp = line.split()
+            cow_id, act_code, act_data, _ = line.split()
 
             arr_id = -1
             if cow_id in index_map:
