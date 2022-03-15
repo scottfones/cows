@@ -9,7 +9,7 @@ python cows.py [file]
 ### Examples
 
 ```bash
-$ python cows.py ./novel_data.txt
+$ python cows.py ./my_data.txt
 7 1000 2000 3
 1 1000 2000 3
 9 1000 2000 8
