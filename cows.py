@@ -1,4 +1,5 @@
 """CISC 320 - Programming Assignment 1 - Scott Fones."""
+import math
 import sys
 import numpy as np
 from pathlib import Path
@@ -61,7 +62,7 @@ class Cow:
 
     def __repr__(self):
         """Return the problem statment's definition for cow record output."""
-        return f"{self.cow_id} {self.low_weight} {self.cur_weight} {self.milk_avg.__floor__()}"
+        return f"{self.cow_id} {self.low_weight} {self.cur_weight} {math.floor(self.milk_avg)}"
 
 
 def main() -> int:
